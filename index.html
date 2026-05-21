@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>شهادة نتيجة نهاية العام </title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:   #0a2342;
+      --blue:   #1560bd;
+      --gold:   #c9972c;
+      --gold2:  #f0c040;
+      --light:  #e8f0fb;
+      --white:  #ffffff;
+      --gray:   #6b7280;
+      --green:  #15803d;
+      --red:    #b91c1c;
+      --purple: #6d28d9;
+      --orange: #b45309;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Cairo', 'Amiri', sans-serif;
+      background: linear-gradient(160deg, #0a1628 0%, #0d2b4e 50%, #0a1e3c 100%);
+      min-height: 100vh;
+      padding: 40px 16px;
+      direction: rtl;
+    }
+
+    /* ── Search Section ── */
+    .search-wrap {
+      max-width: 500px;
+      margin: 0 auto 40px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 40px 36px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+
+    .logo { font-size: 54px; margin-bottom: 10px; }
+
+    .search-wrap h1 {
+      color: var(--gold2);
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+
+    .search-wrap p {
+      color: #8ab4d8;
+      font-size: 14px;
+      margin-bottom: 28px;
+    }
+
+    .input-label {
+      color: #b8d0ea;
+      font-size: 13px;
+      font-weight: 700;
+      display: block;
+      text-align: right;
+      margin-bottom: 8px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 15px 18px;
+      border-radius: 14px;
+      border: 2px solid rgba(201,151,44,0.3);
+      background: rgba(255,255,255,0.07);
+      color: #fff;
+      font-size: 18px;
+      font-family: monospace;
+      letter-spacing: 3px;
+      text-align: center;
+      direction: ltr;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+      margin-bottom: 16px;
+    }
+
+    .search-input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(201,151,44,0.15);
+    }
+
+    .search-input::placeholder { color: #4a6a88; letter-spacing: 1px; font-size: 14px; }
+
+    .btn-search {
+      width: 100%;
+      padding: 15px;
+      border-radius: 14px;
+      border: none;
+      background: linear-gradient(135deg, var(--gold), #e07b20);
+      color: #1a1000;
+      font-size: 17px;
+      font-weight: 900;
+      font-family: 'Cairo', sans-serif;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(201,151,44,0.35);
+      transition: transform .15s, box-shadow .15s;
+    }
+
+    .btn-search:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(201,151,44,0.45); }
+    .btn-search:active { transform: translateY(0); }
+
+    .error-box {
+      margin-top: 16px;
+      padding: 13px 16px;
+      background: rgba(185,28,28,0.18);
+      border: 1px solid rgba(185,28,28,0.4);
+      border-radius: 12px;
+      color: #fca5a5;
+      font-size: 14px;
+      display: none;
+    }
+
+    .loading {
+      margin-top: 16px;
+      color: var(--gold2);
+      font-size: 14px;
+      display: none;
+    }
+
+    /* ── Certificate ── */
+    #certificate {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+      display: none;
+      animation: fadeUp .5s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(30px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* Header */
+    .cert-header {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a4080 100%);
+      padding: 32px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cert-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(255,255,255,0.025) 0px, rgba(255,255,255,0.025) 1px,
+        transparent 1px, transparent 14px
+      );
+    }
+
+    .cert-header .medal { font-size: 44px; margin-bottom: 8px; position: relative; }
+
+    .cert-header h2 {
+      color: var(--gold2);
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      position: relative;
+    }
+
+    .cert-header .subtitle { color: #a0c4e8; font-size: 15px; position: relative; }
+
+    /* Gold divider */
+    .gold-divider {
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold2), var(--gold), transparent);
+    }
+
+    /* Student Info */
+    .student-info {
+      background: #f5f8fd;
+      padding: 24px 36px;
+      border-bottom: 2px solid #dde8f5;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .info-item {
+      background: var(--white);
+      border: 1px solid #d8e6f5;
+      border-radius: 12px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .info-item.full { grid-column: 1 / -1; }
+
+    .info-icon { font-size: 18px; }
+
+    .info-label {
+      color: var(--gray);
+      font-size: 12px;
+      font-weight: 700;
+      display: block;
+    }
+
+    .info-value {
+      color: var(--navy);
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    /* Grades */
+    .grades-section { padding: 28px 36px; }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--navy);
+      margin-bottom: 18px;
+      padding-right: 14px;
+      border-right: 5px solid var(--gold);
+      line-height: 1.4;
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+
+    thead tr { background: var(--navy); }
+
+    thead th {
+      padding: 13px 14px;
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    thead th:first-child { text-align: right; border-radius: 0 8px 0 0; }
+    thead th:last-child  { border-radius: 8px 0 0 0; }
+
+    tbody tr:nth-child(even) { background: #f4f8fd; }
+    tbody tr:hover { background: #eaf1fb; }
+
+    tbody td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #e4edf8;
+      color: #374151;
+      font-size: 14px;
+    }
+
+    tbody td:first-child { font-weight: 700; color: var(--navy); }
+    tbody td:not(:first-child) { text-align: center; }
+
+    .score-val {
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    /* Total Bar */
+    .total-bar {
+      margin: 0 36px 28px;
+      background: linear-gradient(135deg, var(--navy), #1a4080);
+      border-radius: 18px;
+      padding: 22px 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .total-item { text-align: center; }
+
+    .total-label { color: #8ab4d8; font-size: 12px; margin-bottom: 6px; }
+
+    .total-score {
+      color: var(--white);
+      font-size: 30px;
+      font-weight: 900;
+    }
+
+    .total-score span { color: #8ab4d8; font-size: 16px; font-weight: 400; }
+
+    .total-pct { color: var(--gold2); font-size: 28px; font-weight: 900; }
+
+    .grade-pill {
+      display: inline-block;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-size: 17px;
+      font-weight: 900;
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    }
+
+    /* Footer */
+    .cert-footer {
+      background: #f0f5fb;
+      border-top: 2px solid #dde8f5;
+      padding: 16px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-brand { color: var(--navy); font-size: 13px; font-weight: 700; }
+    .footer-brand span { color: var(--gray); font-weight: 400; }
+
+    .btn-print {
+      padding: 9px 22px;
+      border-radius: 10px;
+      border: none;
+      background: var(--navy);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 700;
+      font-family: 'Cairo', sans-serif;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .btn-print:hover { background: var(--blue); }
+
+    .footer-year { color: var(--gray); font-size: 12px; text-align: left; }
+
+    /* Progress bar under table */
+    .progress-wrap { height: 5px; background: #e8f0fb; border-radius: 4px; margin-top: 4px; }
+    .progress-bar  { height: 100%; border-radius: 4px; transition: width .4s ease; }
+
+    @media print {
+      body { background: white; padding: 0; }
+      .search-wrap { display: none !important; }
+      #certificate { display: block !important; box-shadow: none; }
+      .btn-print { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .cert-header { padding: 24px 20px; }
+      .grades-section, .student-info { padding: 20px; }
+      .total-bar { padding: 18px 16px; gap: 8px; }
+      .total-score { font-size: 22px; }
+      .info-grid { grid-template-columns: 1fr; }
+      .info-item.full { grid-column: 1; }
+      .cert-footer { flex-direction: column; gap: 10px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ Search Card ══════════ -->
+<div class="search-wrap">
+  <div class="logo">🏫</div>
+  <h1>نتيجة نهاية العام</h1>
+  <p>أدخل رقمك القومي لعرض شهادة نتيجتك</p>
+
+  <label class="input-label">الرقم القومي</label>
+  <input
+    type="text"
+    id="nidInput"
+    class="search-input"
+    placeholder="أدخل الرقم القومي هنا"
+    maxlength="20"
+    inputmode="numeric"
+  />
+  <button class="btn-search" onclick="search()">🔍 عرض الشهادة</button>
+<br>
+<h2>اعداد وتصميم أ/ مصطفى صبره</h2>
+
+  <div class="loading" id="loading">⏳ جاري البحث...</div>
+  <div class="error-box" id="errorBox"></div>
+</div>
+
+<!-- ══════════ Certificate ══════════ -->
+<div id="certificate">
+
+  <div class="cert-header">
+    <div class="medal">🏅</div>
+    <h2>شهادة نتيجة نهاية العام</h2>
+    <p class="subtitle">العام الدراسي 2025 / 2026</p>
+  </div>
+  <div class="gold-divider"></div>
+
+  <!-- Student Info -->
+  <div class="student-info">
+    <div class="info-grid">
+      <div class="info-item full">
+        <span class="info-icon">👤</span>
+        <div>
+          <span class="info-label">اسم الطالب</span>
+          <span class="info-value" id="sName">—</span>
+        </div>
+      </div>
+      <div class="info-item full">
+        <span class="info-icon">🏫</span>
+        <div>
+          <span class="info-label">المدرسة</span>
+          <span class="info-value" id="sSchool">—</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <span class="info-icon">🪑</span>
+        <div>
+          <span class="info-label">رقم الجلوس</span>
+          <span class="info-value" id="sSeat">—</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <span class="info-icon">🆔</span>
+        <div>
+          <span class="info-label">الرقم القومي</span>
+          <span class="info-value" id="sNID" style="font-family:monospace;letter-spacing:1px;font-size:13px;">—</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grades -->
+  <div class="grades-section">
+    <p class="section-title">درجات المواد الدراسية — نهاية العام</p>
+    <table>
+      <thead>
+        <tr>
+          <th style="text-align:right">المادة</th>
+          <th>الدرجة</th>
+          <th>من</th>
+          <th>نسبة</th>
+          <th>التقدير</th>
+        </tr>
+      </thead>
+      <tbody id="gradesBody"></tbody>
+    </table>
+  </div>
+
+  <!-- Total -->
+  <div class="total-bar">
+    <div class="total-item">
+      <div class="total-label">المجموع الكلي (المواد الأساسية)</div>
+      <div class="total-score" id="tTotal">— <span>/ 140</span></div>
+    </div>
+    <div class="total-item">
+      <div class="total-label">التقدير العام</div>
+      <div id="tGrade"></div>
+    </div>
+    <div class="total-item">
+      <div class="total-label">النسبة المئوية</div>
+      <div class="total-pct" id="tPct">—</div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="cert-footer">
+    <div class="footer-brand">Mr. Mostafa Sabra <span>| 01224061995</span></div>
+    <button class="btn-print" onclick="window.print()">🖨️ طباعة الشهادة</button>
+    <div class="footer-year">نهاية العام<br/>2025 – 2026</div>
+  </div>
+
+</div>
+
+<script>
+const SUBJECTS = [
+  { key:"arabic",    label:"اللغة العربية",           max:40  },
+  { key:"eng1",      label:"اللغة الأجنبية الأولى",   max:30  },
+  { key:"studies",   label:"الدراسات الاجتماعية",     max:20  },
+  { key:"math",      label:"الرياضيات",               max:30  },
+  { key:"science",   label:"العلوم",                  max:20  },
+  { key:"religion",  label:"التربية الدينية",         max:20  },
+  { key:"art",       label:"التربية الفنية",          max:10  },
+  { key:"computer",  label:"الحاسب الآلي",            max:10  },
+  { key:"eng_level", label:"اللغة الأجنبية (مستوى)",  max:25  },
+  { key:"eng2",      label:"اللغة الأجنبية الثانية",  max:20  },
+];
+
+function grade(score, max) {
+  const p = (score / max) * 100;
+  if (p >= 90) return { label:"ممتاز",    color:"#15803d" };
+  if (p >= 75) return { label:"جيد جداً", color:"#1d4ed8" };
+  if (p >= 65) return { label:"جيد",      color:"#6d28d9" };
+  if (p >= 50) return { label:"مقبول",    color:"#b45309" };
+  return            { label:"راسب",     color:"#b91c1c" };
+}
+
+function show(id, val) { document.getElementById(id).textContent = val; }
+
+async function search() {
+  const nid = document.getElementById("nidInput").value.trim();
+  const errBox  = document.getElementById("errorBox");
+  const loading = document.getElementById("loading");
+  const cert    = document.getElementById("certificate");
+
+  errBox.style.display  = "none";
+  cert.style.display    = "none";
+
+  if (!nid) {
+    errBox.textContent = "⚠️ الرجاء إدخال الرقم القومي أولاً";
+    errBox.style.display = "block";
+    return;
+  }
+
+  loading.style.display = "block";
+
+  try {
+    const res = await fetch(`/api/student/${nid}`);
+    loading.style.display = "none";
+
+    if (!res.ok) {
+      errBox.textContent = "❌ لم يتم العثور على الطالب — تأكد من الرقم القومي";
+      errBox.style.display = "block";
+      return;
+    }
+
+    const data = await res.json();
+    const s = data.student;
+
+    // Fill info
+    show("sName",   s.name);
+    show("sSchool", s.school);
+    show("sSeat",   s.seat);
+    show("sNID",    nid);
+
+    // Fill grades
+    const tbody = document.getElementById("gradesBody");
+    tbody.innerHTML = "";
+    SUBJECTS.forEach((subj, i) => {
+      const sc  = s[subj.key] ?? 0;
+      const g   = grade(sc, subj.max);
+      const pct = ((sc / subj.max) * 100).toFixed(1);
+      tbody.innerHTML += `
+        <tr>
+          <td>${subj.label}</td>
+          <td><span class="score-val" style="color:${g.color}">${sc}</span></td>
+          <td style="color:#6b7280">${subj.max}</td>
+          <td>
+            <div class="progress-wrap" style="min-width:60px">
+              <div class="progress-bar" style="width:${pct}%;background:${g.color}"></div>
+            </div>
+            <div style="font-size:11px;color:${g.color};margin-top:2px">${pct}%</div>
+          </td>
+          <td><span class="badge" style="background:${g.color}20;color:${g.color};border:1px solid ${g.color}40">${g.label}</span></td>
+        </tr>`;
+    });
+
+    // Total
+    const MAIN_MAX = 140;
+    const totalGrade = grade(s.total, MAIN_MAX);
+    const pct = ((s.total / MAIN_MAX) * 100).toFixed(1);
+
+    show("tTotal", s.total);
+    show("tPct",   pct + "%");
+    document.getElementById("tGrade").innerHTML =
+      `<span class="grade-pill" style="background:${totalGrade.color}">${totalGrade.label}</span>`;
+
+    cert.style.display = "block";
+    cert.scrollIntoView({ behavior:"smooth", block:"start" });
+
+  } catch(e) {
+    loading.style.display = "none";
+    errBox.textContent = "❌ حدث خطأ في الاتصال — حاول مرة أخرى";
+    errBox.style.display = "block";
+  }
+}
+
+document.getElementById("nidInput").addEventListener("keydown", e => {
+  if (e.key === "Enter") search();
+});
+</script>
+</body>
+</html>
