@@ -69,6 +69,20 @@
   <input type="text" id="nidInput" class="search-input" placeholder="&#1575;&#1604;&#1585;&#1602;&#1605; &#1575;&#1604;&#1602;&#1608;&#1605;&#1610;" maxlength="20" inputmode="numeric"/>
   <button class="btn-search" onclick="doSearch()">&#128269; &#1593;&#1585;&#1590; &#1575;&#1604;&#1588;&#1607;&#1575;&#1583;&#1577;</button>
   <div class="error-box" id="errorBox"></div>
+
+  <!-- Credits bar -->
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1);gap:8px;flex-wrap:wrap;">
+    <div style="text-align:right;">
+      <div style="color:#8ab4d8;font-size:11px;margin-bottom:2px;">مصمم ومنفذ المبادرة</div>
+      <div style="color:#f0c040;font-size:14px;font-weight:900;">أ/ مصطفى صبره</div>
+    </div>
+    <div style="width:1px;height:36px;background:rgba(255,255,255,0.15);"></div>
+    <div style="text-align:left;">
+      <div style="color:#8ab4d8;font-size:11px;margin-bottom:2px;">مدير عام الادارة</div>
+      <div style="color:#f0c040;font-size:14px;font-weight:900;">أ/ شريف فتحى</div>
+    </div>
+  </div>
+
 </div>
 <div id="certificate">
   <div class="cert-header">
@@ -90,18 +104,17 @@
     <table>
       <thead><tr>
         <th style="text-align:right">&#1575;&#1604;&#1605;&#1575;&#1583;&#1577;</th>
-        <th>&#1575;&#1604;&#1583;&#1585;&#1580;&#1577;</th><th>&#1605;&#1606;</th><th>&#1606;&#1587;&#1576;&#1577;</th><th>&#1575;&#1604;&#1578;&#1602;&#1583;&#1610;&#1585;</th>
+        <th>&#1575;&#1604;&#1583;&#1585;&#1580;&#1577;</th><th>&#1605;&#1606;</th>
       </tr></thead>
       <tbody id="gradesBody"></tbody>
     </table>
   </div>
-  <div class="total-bar">
+  <div class="total-bar" style="grid-template-columns:1fr 1fr;">
     <div class="total-item"><div class="total-label">&#1575;&#1604;&#1605;&#1580;&#1605;&#1608;&#1593; &#1575;&#1604;&#1603;&#1604;&#1610;</div><div class="total-score" id="tTotal">&#8212; <span>/ 280</span></div></div>
-    <div class="total-item"><div class="total-label">&#1575;&#1604;&#1578;&#1602;&#1583;&#1610;&#1585; &#1575;&#1604;&#1593;&#1575;&#1605;</div><div id="tGrade"></div></div>
-    <div class="total-item"><div class="total-label">&#1575;&#1604;&#1606;&#1587;&#1576;&#1577; &#1575;&#1604;&#1605;&#1574;&#1608;&#1610;&#1577;</div><div class="total-pct" id="tPct">&#8212;</div></div>
+    <div class="total-item"><div class="total-label">&#1575;&#1604;&#1606;&#1578;&#1610;&#1580;&#1577;</div><div id="tGrade"></div></div>
   </div>
   <!-- Result Banner -->
-  <div id="resultBanner" style="margin:0 36px 20px;padding:16px 24px;border-radius:14px;text-align:center;font-size:18px;font-weight:900;"></div>
+  <div id="resultBanner" style="display:none" style="margin:0 36px 20px;padding:16px 24px;border-radius:14px;text-align:center;font-size:18px;font-weight:900;"></div>
   <!-- Note -->
   <div id="noteBox" style="margin:0 36px 24px;padding:14px 18px;background:#fffbeb;border:1px solid #fcd34d;border-radius:12px;color:#92400e;font-size:13px;text-align:center;display:none;"></div>
   <div class="cert-footer" style="flex-wrap:wrap;gap:12px;">
@@ -152,21 +165,12 @@ function doSearch(){
     const sc=s[subj.key]||0;
     const g=grade(sc,subj.max);
     const p=((sc/subj.max)*100).toFixed(1);
-    tbody.innerHTML+='<tr><td>'+subj.label+'</td><td><span class="score-val" style="color:'+g.color+'">'+sc+'</span></td><td style="color:#6b7280">'+subj.max+'</td><td><div class="progress-wrap"><div class="progress-bar" style="width:'+p+'%;background:'+g.color+'"></div></div><div style="font-size:11px;color:'+g.color+'">'+p+'%</div></td><td><span class="badge" style="background:'+g.color+'20;color:'+g.color+';border:1px solid '+g.color+'40">'+g.label+'</span></td></tr>';
+    tbody.innerHTML+='<tr><td>'+subj.label+'</td><td style="text-align:center;font-size:16px;font-weight:900;color:var(--navy)">'+sc+'</td><td style="text-align:center;color:#6b7280">'+subj.max+'</td></tr>';
   });
-  const tg=grade(s.total,280);
   document.getElementById("tTotal").innerHTML=s.total+'<span> / 280</span>';
-  document.getElementById("tPct").textContent=((s.total/280)*100).toFixed(1)+"%";
-  document.getElementById("tGrade").innerHTML='<span class="grade-pill" style="background:'+tg.color+'">'+tg.label+'</span>';
-  // Result banner
-  const rb = document.getElementById("resultBanner");
-  if(s.result === "ناجح" || s.result === "ناجحة"){
-    rb.style.background="#dcfce7"; rb.style.color="#15803d"; rb.style.border="2px solid #86efac";
-    rb.textContent="✅ نتيجة: ناجح";
-  } else {
-    rb.style.background="#fee2e2"; rb.style.color="#b91c1c"; rb.style.border="2px solid #fca5a5";
-    rb.textContent="❌ نتيجة: راسب";
-  }
+  var resColor = (s.result==="ناجح"||s.result==="ناجحة") ? "#15803d" : "#b91c1c";
+  document.getElementById("tGrade").innerHTML='<span class="grade-pill" style="background:'+resColor+'">'+s.result+'</span>';
+
   // Note
   const nb = document.getElementById("noteBox");
   if(s.note && s.note !== "None" && s.note.trim()){
