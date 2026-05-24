@@ -163,7 +163,7 @@ async function doSearch(){
   if(!cache[prefix]){
     load.style.display="block"; btn.disabled=true;
     try {
-      const res = await fetch("data/" + prefix + ".json");
+      const res = await fetch(prefix + ".json");
       if(!res.ok){ cache[prefix] = {}; }
       else { cache[prefix] = await res.json(); }
     } catch(e){ cache[prefix] = {}; }
