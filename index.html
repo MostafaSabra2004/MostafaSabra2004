@@ -3,18 +3,78 @@
 <head>
 <meta charset="utf-8">
 <title>نتيجة مدرسة الثغر الرسمية لغات</title>
+
 <style>
-body{font-family:Arial;margin:40px;max-width:900px}
-input,button{padding:10px;font-size:16px}
-table{border-collapse:collapse;width:100%;margin-top:20px}
-td,th{border:1px solid #ccc;padding:8px}
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+body{
+font-family:'Cairo',Arial,sans-serif;
+background:linear-gradient(135deg,#eef4ff,#f8fbff);
+margin:0;
+padding:30px;
+}
+.container{
+max-width:900px;
+margin:auto;
+background:#fff;
+padding:30px;
+border-radius:18px;
+box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
+h2{
+text-align:center;
+color:#0d47a1;
+margin-bottom:10px;
+}
+.credit{
+text-align:center;
+background:#e8f0fe;
+padding:10px;
+border-radius:10px;
+font-weight:bold;
+color:#1565c0;
+margin-bottom:20px;
+}
+input{
+width:70%;
+padding:12px;
+border:1px solid #cfd8dc;
+border-radius:10px;
+font-size:16px;
+}
+button{
+padding:12px 24px;
+background:#1565c0;
+color:white;
+border:none;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+}
+button:hover{opacity:.9}
+table{
+border-collapse:collapse;
+width:100%;
+margin-top:20px;
+overflow:hidden;
+border-radius:12px;
+}
+th{
+background:#1565c0;
+color:white;
+width:35%;
+}
+td,th{
+border:1px solid #ddd;
+padding:10px;
+}
+tr:nth-child(even){background:#f7f9fc}
+#out{margin-top:20px}
 </style>
+
 </head>
-<body>
+<body><div class='container'>
 <h2>نتيجة مدرسة الثغر الرسمية لغات</h2>
-<div style="margin-top:10px;padding:8px;background:#f3f3f3;border-radius:8px;text-align:center">
-<b>إعداد وتصميم أ/ مصطفى صبره</b>
-</div>
+<div class='credit'>إعداد وتصميم أ/ مصطفى صبره</div>
 
 <p>أدخل الرقم القومي:</p>
 <input id="nid" type="text">
@@ -37,5 +97,5 @@ function search(){
  out.innerHTML=html;
 }
 </script>
-</body>
+</div></body>
 </html>
